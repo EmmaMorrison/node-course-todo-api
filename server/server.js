@@ -29,6 +29,25 @@ app.get('/todos', (req, res) => {
   });
 });
 
+//GET /Todos
+app.get('/todos/:id', (req, res) => {
+  let id = req.params.id;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).send('That ID is not valid');
+  }
+
+  Todo.findById(id).then((todo)=> {
+    if (!todo) {
+      return res.status(404).send('That todo could not be found');
+    }
+    res.send({todo});
+  }).catch((e) => {
+    res.status(400).send('That user couldn\'t be found');
+  });
+});
+
+
 app.listen(3000, () => {
   console.log('Started on port 3000');
 });

@@ -42,8 +42,6 @@ describe('POST /todos', () => {
 
   it('should not create todo with invalid body data', (done) => {
 
-    // remember to ensure todos.length is 0
-    //don't need to make assertions about the body because there is nothing
     let text = '  ';
 
     request(app)
