@@ -35,7 +35,7 @@ app.get('/todos/:id', (req, res) => {
   let id = req.params.id;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).send('That ID is not valid');
+    return res.status(404).send();
   }
 
   Todo.findById(id).then((todo)=> {
@@ -45,6 +45,23 @@ app.get('/todos/:id', (req, res) => {
     res.send({todo});
   }).catch((e) => {
     res.status(400).send('That user couldn\'t be found');
+  });
+});
+
+app.delete('/todos/:id', (req, res) => {
+  let id = req.params.id;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).send();
+  }
+
+  Todo.findByIdAndRemove(id).then((todo) => {
+    if (!todo) {
+      return res.status(404).send();
+    }
+    res.send({todo});
+  }).catch((e) => {
+    res.status(400).send();
   });
 });
 
