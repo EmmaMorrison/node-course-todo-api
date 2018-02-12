@@ -1,5 +1,5 @@
 let env = process.env.NODE_ENV || 'development';
-console.log('env ******', env);
+console.log('\n environment \n **************** \n', env);
 
 if (env === 'development') {
   process.env.PORT = 3000;
